@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login</title>
+  <style>
+    :root{--g1:#f0a;--g2:#f43;--b1:#0cf;--b2:#06f}
+    *{box-sizing:border-box} body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Arial;background:#f6f7fb}
+    .wrap{min-height:100svh;display:grid;place-items:center;
+      background:
+        radial-gradient(60vmax 60vmax at -10% -10%, #f0a6 0 40%, transparent 41%),
+        radial-gradient(60vmax 60vmax at 110% 110%, #0cf6 0 40%, transparent 41%)}
+    .card{width:min(420px,92%);background:#fff;border:1px solid #fff6;border-radius:22px;box-shadow:0 20px 60px #0001}
+    .inner{padding:28px}
+    .logo{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;color:#fff;font-weight:800;
+      background:linear-gradient(135deg,var(--g1),var(--g2))}
+    h1{margin:12px 0 4px;font-size:22px} p{margin:0 0 18px;color:#475569}
+    label{display:block;font-size:13px;color:#334155;margin-bottom:6px}
+    input[type="email"],input[type="password"]{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;background:#fff}
+    .row{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0 2px}
+    .btn{width:100%;padding:12px 16px;border:0;border-radius:12px;color:#fff;font-weight:600;cursor:pointer;
+      background:linear-gradient(90deg,var(--g1),var(--g2))} .btn:active{transform:scale(.99)}
+    .hint{font-size:12px;color:#64748b;text-align:center;margin-top:8px}
+    .err{color:#b91c1c;background:#fee2e2;border:1px solid #fecaca;padding:10px 12px;border-radius:12px;font-size:13px;margin-top:10px}
+    a{color:#d946ef;text-decoration:none} a:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <div id="root" class="wrap"></div>
+
+  <!-- React + ReactDOM CDN -->
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <!-- Babel: JSX'i tarayıcıda derlemek için -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    function Login() {
+      const [email, setEmail] = React.useState("");
+      const [pass, setPass]   = React.useState("");
+      const [err, setErr]     = React.useState("");
+
+      const onSubmit = (e) => {
+        e.preventDefault();
+        setErr("");
+        if (email === "admin@site.com" && pass === "123456") {
+          alert("Başarıyla giriş yaptın 🎉");
+          setEmail(""); setPass("");
+        } else {
+          setErr("Hatalı e-posta veya şifre. Demo: admin@site.com / 123456");
+        }
+      };
+
+      return (
+        <div className="card">
+          <div className="inner">
+            <div className="logo">LOG</div>
+            <h1>Giriş Yap</h1>
+            <p>Devam etmek için hesabınla giriş yap.</p>
+
+            <form onSubmit={onSubmit}>
+              <label>E-posta</label>
+              <input type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="admin@site.com" required />
+
+              <label style={{marginTop:12}}>Şifre</label>
+              <input type="password" value={pass} onChange={e=>setPass(e.target.value)} placeholder="••••••" minLength={6} required />
+
+              <div className="row">
+                <label style={{display:"flex",alignItems:"center",gap:8,fontSize:13}}>
+                  <input type="checkbox" /> Beni hatırla
+                </label>
+                <a href="#">Şifremi unuttum</a>
+              </div>
+
+              {err && <div className="err">{err}</div>}
+
+              <button className="btn" style={{marginTop:12}}>Giriş Yap</button>
+              <div className="hint">Demo: <b>admin@site.com</b> / <b>123456</b></div>
+            </form>
+          </div>
+        </div>
+      );
+    }
+
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<Login />);
+  </script>
+</body>
+</html>

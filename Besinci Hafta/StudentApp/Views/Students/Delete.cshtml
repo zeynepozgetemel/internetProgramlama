@@ -1,0 +1,13 @@
+@model StudentApp.Models.Student
+@{
+ViewData["Title"] = "Sil";
+}
+<h1>Sil</h1>
+<div class="alert alert-warning">
+<p><b>@Model.FullName</b> kaydını silmek istediğinizden emin misiniz?</p>
+</div>
+<form asp-action="Delete" method="post">
+<input type="hidden" asp-for="Id" />
+<button class="btn btn-danger" type="submit">Evet, Sil</button>
+<a class="btn btn-secondary" href="/Students">Vazgeç</a>
+</form>

@@ -1,0 +1,27 @@
+@model IEnumerable<StudentApp.Models.Student>
+@{
+ViewData["Title"] = "Öğrenciler";
+}
+<h1>Öğrenciler</h1>
+<p><a class="btn btn-primary" href="/Students/Create">Yeni Öğrenci</a></p>
+<table class="table table-striped">
+<thead>
+<tr><th>ID</th><th>Ad Soyad</th><th>Email</th><th>Not</th><th></th></tr>
+</thead>
+<tbody>
+@foreach (var s in Model)
+{
+<tr>
+<td>@s.Id</td>
+<td>@s.FullName</td>
+<td>@s.Email</td>
+<td>@s.Grade</td>
+<td>
+<a href="/Students/Edit/@s.Id">Düzenle</a> |
+<a href="/Students/Details/@s.Id">Detay</a> |
+<a href="/Students/Delete/@s.Id">Sil</a>
+</td>
+</tr>
+}
+</tbody>
+</table>

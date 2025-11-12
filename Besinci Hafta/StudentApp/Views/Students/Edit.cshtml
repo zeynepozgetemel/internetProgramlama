@@ -1,0 +1,23 @@
+@model StudentApp.Models.Student
+@{
+ViewData["Title"] = "Öğrenci Düzenle";
+}
+<h1>Öğrenci Düzenle</h1>
+<form asp-action="Edit" method="post">
+<input type="hidden" asp-for="Id" />
+<div class="mb-3">
+<label class="form-label">Ad Soyad</label>
+<input class="form-control" asp-for="FullName" />
+<span class="text-danger" asp-validation-for="FullName"></span>
+</div>
+<div class="mb-3">
+<label class="form-label">Email</label>
+<input class="form-control" asp-for="Email" />
+</div>
+<div class="mb-3">
+<label class="form-label">Not</label>
+<input class="form-control" asp-for="Grade" type="number" />
+</div>
+<button class="btn btn-primary" type="submit">Güncelle</button>
+<a class="btn btn-secondary" href="/Students">Geri</a>
+</form>
